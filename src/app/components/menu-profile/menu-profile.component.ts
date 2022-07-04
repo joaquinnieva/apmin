@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-profile',
@@ -6,14 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-profile.component.css']
 })
 export class MenuProfileComponent implements OnInit {
-
-  public isOpenMenuProfile = false;
-  constructor() { }
+  @Input() name = ''
+  public isOpenMenuApi = false;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
   
-  menuProfileHandler(){
-    this.isOpenMenuProfile = !this.isOpenMenuProfile
+  menuApiHandler(){
+    this.isOpenMenuApi = !this.isOpenMenuApi
+  }
+  logout(){
+    localStorage.removeItem('session')
+    this.router.navigate(['login'])
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { isLogged } from 'src/utils/isLogged';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,5 @@ import { isLogged } from 'src/utils/isLogged';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public session = isLogged();
+
 }
