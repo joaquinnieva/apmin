@@ -1,0 +1,34 @@
+<section class="relative text-gray-400 bg-gray-900 body-font">
+  <button *ngIf="inEdit" class="absolute top-0 right-0 px-4 py-2 m-4 font-bold text-white bg-gray-800 rounded hover:bg-gray-700" (click)="saveShip()">Guardar</button>
+  <div *ngIf="shipInfo" class="container flex flex-wrap px-5 py-24 mx-auto">
+    <div *ngFor="let step of shipInfo.data;  index as i; " class="relative flex pt-10 pb-20 mx-auto sm:items-center md:w-2/3">
+      <div class="absolute inset-0 flex items-center justify-center w-6 h-full">
+        <div class="w-1 h-full bg-gray-800 pointer-events-none"></div>
+      </div>
+      <div class="relative z-10 inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mt-10 text-sm font-medium text-white bg-blue-500 rounded-full sm:mt-0 title-font">{{i+1}}</div>
+      <div class="flex flex-col items-start flex-grow pl-6 md:pl-8 sm:items-center sm:flex-row">
+        <div *ngIf="step.status" class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 text-indigo-400 bg-gray-800 rounded-full">
+          <svg width="40" height="40" fill="#2676be" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.25 12.321 7.27 6.491c.143.127.321.19.499.19.206 0 .41-.084.559-.249l11.23-12.501c.129-.143.192-.321.192-.5 0-.419-.338-.75-.749-.75-.206 0-.411.084-.559.249l-10.731 11.945-6.711-5.994c-.144-.127-.322-.19-.5-.19-.417 0-.75.336-.75.749 0 .206.084.412.25.56" fill-rule="nonzero"/></svg>
+        </div>
+        <div *ngIf="!step.status" class="inline-flex items-center justify-center flex-shrink-0 w-24 h-24 text-indigo-400 bg-gray-800 rounded-full">
+          <svg width="40" height="40" fill="#2676be" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg>
+        </div>
+        
+        <div class="flex-grow mt-6 sm:pl-6 sm:mt-0">
+          <h2 class="mb-1 text-xl font-medium text-white title-font">
+            Paso Nº {{i+1}}
+          </h2>
+          <input *ngIf="isAuthor" type="text" [(ngModel)]="step.description" (keyup)="onFocus()" class="w-full bg-transparent border-2 border-b border-none outline-none focus:outline-none border-stone-300">
+          <p *ngIf="!isAuthor">{{step.description}}</p>
+        </div>
+        <div *ngIf="isAuthor" class="p-4">
+          <button *ngIf="!step.status" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600" (click)="stepDone(i)">Listo</button>
+          <button *ngIf="step.status" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-600" (click)="stepToDo(i)">Pendiente</button>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+</section>

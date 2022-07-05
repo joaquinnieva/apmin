@@ -6,10 +6,15 @@
                     <div class="flex flex-row justify-between p-6 bg-gray-800 border-b border-gray-700 sm:px-20">
                         <div class="flex flex-col">
                             <div class="mt-2 text-2xl text-gray-200"> Lista de envíos </div>
-                            <div class="mt-4 text-gray-400"> Aca se listan tus envíos, segun el color es su estado </div>
+                            <div class="mt-4 text-gray-400"> Aca se listan tus envíos, segun el color es su estado
+                            </div>
                         </div>
-                        <div class="self-center cursor-pointer" (click)="newSend()">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg>
+                        <div class="self-center transition-all cursor-pointer" (click)="newSend()" [ngClass]="{'rotate-45': createSend }">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
+                            </svg>
                         </div>
                     </div>
                     <div class="bg-gray-800 bg-opacity-25">
@@ -18,32 +23,43 @@
                             <div class="ml-4 text-lg font-semibold leading-7 text-gray-200">
                                 Crear nuevo envío
                             </div>
-                            <div class="ml-4">
-                                <div class="w-full mb-6">
-                                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Titulo del envío</label>
-                                    <input [(ngModel)]="createSendTitle" type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Titulo del envio" required>
+                            <div class="ml-4 transition-all">
+                                <div class="w-full mb-6 ">
+                                    <label for="title" class="block mb-2 text-sm text-white font-mediumtext-gray-300">Titulo del
+                                        envío</label>
+                                    <input [(ngModel)]="createSendTitle" type="text" id="title"
+                                        class="bg-gray-700 border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-600 placeholder-gray-400 text-white"
+                                        placeholder="Titulo del envio" required>
                                 </div>
-                                <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Pasos del envío </div>
+                                <div class="block mb-2 text-sm text-white font-mediumtext-gray-300"> Pasos del envío </div>
                                 <div class="w-full mb-2" *ngFor="let step of createSendArray; index as i;">
-                                    <input [(ngModel)]="createSendArray[i].description" type="text" id="step{{i}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre del punto o paso {{i+1}}" required>
+                                    <input [(ngModel)]="createSendArray[i].description" type="text" id="step{{i}}"
+                                        class="transition-all bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-gray-600 placeholder-gray-400 text-white"
+                                        placeholder="Nombre del punto o paso {{i+1}}" required>
                                 </div>
-                                <div class="flex justify-center mb-2 text-sm font-medium text-gray-900 cursor-pointer dark:text-gray-300" (click)="addStep()">
-                                     <svg fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg> 
+                                <div class="flex justify-center gap-4 mb-2 text-sm font-medium text-gray-300">
+                                    <svg class="cursor-pointer" (click)="addStep()" fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
+                                    </svg>
+                                    <svg *ngIf="createSendArray.length > 1" class="transition-all cursor-pointer" (click)="sustractStep()" fill="white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-12v-2h12v2z"/>
+                                    </svg>
                                 </div>
                             </div>
                             <div class="flex justify-end">
-                                <button type="submit" class="ml-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="createShip()">Submit</button>
+                                <button type="submit"
+                                    class="ml-4 text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                                    (click)="createShip()">Crear envío</button>
                             </div>
                         </div>
 
-                        <div class="p-6 border-t border-gray-700">
-                            <div class="flex items-center">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-200">
-                                    <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                    </path>
-                                </svg>
+                        <div class="p-6 border-t border-gray-700" *ngFor="let ship of ships; index as i;">
+                            <div class="flex items-center" >
+                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="white" fill-rule="evenodd" clip-rule="evenodd"><path d="M5 11v1h8v-7h-10v-1c0-.552.448-1 1-1h10c.552 0 1 .448 1 1v2h4.667c1.117 0 1.6.576 1.936 1.107.594.94 1.536 2.432 2.109 3.378.188.312.288.67.288 1.035v4.48c0 1.089-.743 2-2 2h-1c0 1.656-1.344 3-3 3s-3-1.344-3-3h-4c0 1.656-1.344 3-3 3s-3-1.344-3-3h-1c-.552 0-1-.448-1-1v-6h-2v-2h7v2h-3zm3 5.8c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm10 0c.662 0 1.2.538 1.2 1.2 0 .662-.538 1.2-1.2 1.2-.662 0-1.2-.538-1.2-1.2 0-.662.538-1.2 1.2-1.2zm-3-2.8h-10v2h.765c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h5.53c.549-.614 1.347-1 2.235-1 .888 0 1.686.386 2.235 1h1.765v-4.575l-1.711-2.929c-.179-.307-.508-.496-.863-.496h-4.426v6zm1-5v3h5l-1.427-2.496c-.178-.312-.509-.504-.868-.504h-2.705zm-16-3h8v2h-8v-2z"/></svg>
                                 <div class="ml-4 text-lg font-semibold leading-7 text-gray-200">
-                                    <a href="https://tailwindcss.com/">Titulo del envio</a>
+                                    <a href="ship/{{ship.id}}">{{ship.title}}</a>
                                 </div>
                             </div>
                         </div>

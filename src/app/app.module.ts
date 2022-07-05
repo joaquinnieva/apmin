@@ -10,6 +10,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ShipComponent } from './pages/ship/ship.component';
 import { ApiService } from './services/api.service';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ApiService } from './services/api.service';
     HomeComponent,
     AdminComponent,
     LoginComponent,
+    ShipComponent
   ],
   imports: [
     FormsModule,

@@ -32,4 +32,13 @@ export class ApiService {
   async createShip(body: any) {
     return this.http.post(this.api + 'shipping', body).toPromise();
   }
+  async getShipsAuthor( author: any ) {
+    return this.http.get(this.api + 'shipping/author/' + author ).toPromise();
+  }
+  async getShipById( id: any ) {
+    return this.http.get(this.api + 'shipping/' + id ).toPromise();
+  }
+  async editShipById( id: any, data: any ) {
+    return this.http.put(this.api + 'shipping/' + id, { data } ).toPromise();
+  }
 }
