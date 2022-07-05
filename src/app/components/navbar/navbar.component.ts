@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { ApiService } from 'src/app/services/api.service';
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
     public authService: AuthGuard,
     private apiService:ApiService,
     private loginService: LoginService,
+    private router: Router,
   ) {
     this.getInfoUser()
   }
@@ -45,5 +47,9 @@ export class NavbarComponent implements OnInit {
     } catch(Error) {
       return null;
     }
+  }
+  logout(){
+    localStorage.removeItem('session')
+    this.router.navigate(['login'])
   }
 }

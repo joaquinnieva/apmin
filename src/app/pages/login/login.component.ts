@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
   public name = ''
   public password = ''
+  public section = 'login'
   session:any;
 
   constructor(
@@ -28,6 +29,18 @@ export class LoginComponent implements OnInit {
       this.saveSession()
     }
   }
+  async register(){
+    const body = { name: this.name, password: this.password };
+    const registered = await this.apiService.registerUser(body)
+    if (registered) {
+      console.log(registered)
+      this.session = await this.apiService.loginUser(body)
+      if (this.session) {
+        this.loginService.loginin.emit(this.session)
+        this.saveSession()
+      }
+    }
+  }
   saveSession(){
     if (this.session) {
       localStorage.setItem('session',JSON.stringify(this.session))
@@ -35,5 +48,11 @@ export class LoginComponent implements OnInit {
       window.location.replace('admin');
     }
   }
-
+  sectionSwitch(){
+    if (this.section == 'login') {
+      this.section = 'register'
+    } else {
+      this.section = 'login'
+    }
+  }
 }

@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
   public createSend = false
   public createSendTitle = ''
   public createSendArray = [ { description: '' } ]
+  public errorMessage:any = null
 
   constructor(
     private apiService: ApiService
@@ -40,14 +41,34 @@ export class AdminComponent implements OnInit {
       title: this.createSendTitle,
       data: this.createSendArray
     }
-    if ((this.createSendTitle.length  > 1 && this.createSendArray.length  > 1) ) {
+
+    let fieldEmpty:any = this.createSendArray.filter((field) => field.description == '')
+    if (fieldEmpty.length == 0) {
+      fieldEmpty = null
+    }
+
+    if (this.createSendTitle.length  > 1 && this.createSendArray.length  > 1 && !fieldEmpty) {
+      this.errorMessage = ''
       const res = await this.apiService.createShip(body)
       if (res) {
         this.newSend()
         this.getShips()
+        this.resetForm()
+      }
+    } else {
+      if (this.createSendTitle.length == 0) {
+        this.errorMessage = 'Debe haber titulo'
+      } else if (fieldEmpty) {
+        console.log(fieldEmpty)
+        this.errorMessage = 'Debe llenar los campos'
+      } else if (this.createSendArray.length == 1) {
+        this.errorMessage = 'Debe haber 2 pasos como mínimo'
       }
     }
-    
+  }
+  resetForm(){
+    this.createSendTitle = ''
+    this.createSendArray =  [ { description: '' } ]
   }
   async getInfoUser(){
     const user = localStorage.getItem('session')
@@ -59,7 +80,6 @@ export class AdminComponent implements OnInit {
   async getShips(){
     if (this.user) {
       this.ships = await this.apiService.getShipsAuthor(this.user.name)
-      console.log(this.ships)
     }
   }
   getDecodedAccessToken(token: string): any {

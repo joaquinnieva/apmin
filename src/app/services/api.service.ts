@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   async registerUser(body: any) {
-    return this.http.post(this.api, body).toPromise();
+    return this.http.post(this.api + "user", body).toPromise();
   }
   async addDataToUser(body: any) {
     return this.http.put(this.api, body).toPromise();

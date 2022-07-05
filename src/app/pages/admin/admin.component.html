@@ -48,7 +48,10 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="flex justify-end">
+                            <div class="flex justify-between ml-4">
+                                <div>
+                                    <p *ngIf="errorMessage" class="text-red-400"> {{errorMessage}} </p>
+                                </div>
                                 <button type="submit"
                                     class="ml-4 text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                                     (click)="createShip()">Crear envío</button>
