@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
-  api:string = 'https://apminapi-production.up.railway.app/api/';
+  api:string = 'https://apmin.onrender.com/api/';
 
   constructor(private http: HttpClient) {}
 

@@ -18,6 +18,10 @@
             class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out border-b-2 border-transparent focus:outline-none hover:text-gray-400">
             Envíos
           </a>
+          <a href="/ship/12" *ngIf="!authService.canActivate()"
+            class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-200 transition duration-150 ease-in-out border-b-2 border-transparent focus:outline-none hover:text-gray-400">
+            Muestra
+          </a>
         </div>
         
       </div>
